@@ -1,10 +1,15 @@
 /**
- * Empacota dist-extension/ no ZIP que a Chrome Web Store aceita no upload.
+ * Empacota dist-extension/ para distribuicao.
  *
- * O painel exige um ZIP cuja raiz seja o manifest.json, e nao uma pasta contendo
- * o manifesto; o zip roda de dentro de dist-extension por causa disso.
+ * O ZIP tem o manifest.json na raiz, e nao uma pasta contendo o manifesto: e o
+ * formato que o Chrome espera ao descompactar e o mesmo que a Chrome Web Store
+ * aceitaria no upload. Por isso o zip roda de dentro de dist-extension.
  *
- * Saida: dist-extension-<versao>.zip
+ * O nome nao leva a versao para que o link do release mais recente no GitHub
+ * (/releases/latest/download/promo-radar-extensao.zip) continue valendo a cada
+ * publicacao. A versao fica no manifesto e no nome do release.
+ *
+ * Saida: promo-radar-extensao.zip
  */
 
 import { execFileSync } from "node:child_process";
@@ -21,7 +26,7 @@ if (!existsSync(resolve(buildDir, "manifest.json"))) {
 }
 
 const { version } = JSON.parse(readFileSync(resolve(buildDir, "manifest.json"), "utf8"));
-const zipPath = resolve(root, `promo-radar-extensao-${version}.zip`);
+const zipPath = resolve(root, "promo-radar-extensao.zip");
 
 // Reempacotar por cima do anterior deixaria arquivos de builds antigas dentro.
 rmSync(zipPath, { force: true });
@@ -33,6 +38,6 @@ const files = execFileSync("unzip", ["-l", zipPath], { encoding: "utf8" })
   .split("\n")
   .slice(-1)[0];
 
-console.log(`[32m✓ ${zipPath.replace(`${root}/`, "")}[0m`);
+console.log(`[32m✓ ${zipPath.replace(`${root}/`, "")} (versao ${version})[0m`);
 console.log(`  ${files.trim()}`);
-console.log("  Upload em: https://chrome.google.com/webstore/devconsole");
+console.log("  Anexe ao release do GitHub para virar o download da versao mais recente.");

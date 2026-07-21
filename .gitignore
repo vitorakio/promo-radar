@@ -10,8 +10,9 @@ yarn-error.*
 # export web do Expo
 dist/
 
-# build da extensao do Chrome
+# build da extensao do Chrome (o ZIP e distribuido pelos releases do GitHub)
 dist-extension/
+promo-radar-extensao*.zip
 
 # APK gerado
 dist-apk/

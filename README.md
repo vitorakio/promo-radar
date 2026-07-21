@@ -11,22 +11,34 @@ de armazenamento e notificacao; a camada de servicos e a interface sao as mesmas
 
 ## Extensao do Chrome
 
+### Instalar sem clonar o projeto
+
+**[Baixar promo-radar-extensao.zip](https://github.com/vitorakio/promo-radar/releases/latest/download/promo-radar-extensao.zip)**
+— nao precisa de Node nem de build.
+
+1. Descompacte numa pasta definitiva, por exemplo
+   `~/.local/share/promo-radar/extension` (Windows: `%LOCALAPPDATA%\PromoRadar\extension`).
+2. Abra `chrome://extensions` e ligue o **modo desenvolvedor**, no canto superior direito.
+3. **Carregar sem compactacao** › selecione a pasta onde descompactou.
+
+> **Escolha bem a pasta e nao mova depois.** O Chrome deriva o id da extensao do
+> caminho absoluto dela, e o id e a identidade do armazenamento: mudar de lugar
+> equivale a instalar outra extensao, com historico de precos, preferencias e
+> feed zerados.
+
+Para atualizar, baixe o ZIP novo, substitua o conteudo **da mesma pasta** e
+clique em atualizar no card da extensao.
+
+### Instalar a partir do codigo
+
 ```bash
 npm run extension:install
 ```
 
-Compila e copia para `~/.local/share/promo-radar/extension`. Depois, uma vez so:
-`chrome://extensions` › ligue o **modo desenvolvedor** › **Carregar sem
-compactacao** › selecione esse caminho.
-
-Instale de la, e nao de `dist-extension/`: o Chrome deriva o id da extensao do
-caminho absoluto, e o id e a identidade do armazenamento. Como `dist-extension/`
-e recriado do zero a cada build, apontar o Chrome para ele faz a extensao sumir
-da lista durante qualquer rebuild. O diretorio de instalacao so tem o conteudo
-trocado, entao o id se mantem e historico, preferencias e feed sobrevivem.
-
-Para atualizar depois de mexer no codigo: rode o comando de novo e clique em
-atualizar no card da extensao.
+Compila e copia para `~/.local/share/promo-radar/extension`, mesma pasta acima.
+Instale de la, e nao de `dist-extension/`, que e recriado do zero a cada build:
+apontar o Chrome para ele faz a extensao sumir da lista durante qualquer rebuild.
+O diretorio de instalacao so tem o conteudo trocado, entao o id se mantem.
 
 O que a extensao faz alem do app web:
 
@@ -42,15 +54,15 @@ O que a extensao faz alem do app web:
 Popup e service worker compartilham o mesmo `chrome.storage.local`, entao o feed
 que aparece ao abrir o popup e o da ultima varredura de segundo plano.
 
-Para levar a extensao a outra maquina:
+### Publicar uma versao nova
 
 ```bash
-npm run extension:zip   # gera promo-radar-extensao-<versao>.zip
+npm run extension:zip   # gera promo-radar-extensao.zip
 ```
 
-Descompacte em `~/.local/share/promo-radar/extension` do outro computador e
-carregue por la. O ZIP tem o `manifest.json` na raiz, que e tambem o formato que
-a Chrome Web Store aceita, caso um dia queira publicar.
+Suba a `version` no `package.json`, gere o ZIP e anexe a um release novo no
+GitHub com esse mesmo nome de arquivo: e o que mantem o link de download acima
+sempre apontando para a versao mais recente. O ZIP nao e versionado no git.
 
 ## APK Android
 

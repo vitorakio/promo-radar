@@ -42,6 +42,11 @@ export type Deal = {
   imported?: boolean;
   /** Estimativa de custo final para produto importado. */
   importTax?: ImportTaxEstimate;
+  /**
+   * Preco (ou cupom) que so vale comprando pelo aplicativo da loja. Aberto no
+   * navegador, o valor anunciado pode nao aparecer.
+   */
+  appOnly?: boolean;
 };
 
 export type ImportTaxEstimate = {
@@ -84,6 +89,8 @@ export type MarketOffer = {
   communityVotes?: number;
   /** A fonte sinaliza suspeita de erro de preco. */
   priceError?: boolean;
+  /** Oferta cujo desconto ou cupom so vale dentro do aplicativo da loja. */
+  appOnly?: boolean;
   /** Quando a fonte publicou a promocao (ISO). */
   publishedAt?: string;
   /**

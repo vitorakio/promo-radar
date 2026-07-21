@@ -272,6 +272,7 @@ const toDeal = (
   notes: classification.notes,
   publishedAt: offer.publishedAt,
   priceSince: baseline?.currentPriceSince ? new Date(baseline.currentPriceSince).toISOString() : undefined,
+  appOnly: offer.appOnly,
   ...describeImport(offer, taxContext)
 });
 

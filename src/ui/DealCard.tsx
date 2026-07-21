@@ -121,6 +121,13 @@ export function DealCard({ deal, index, highlight }: Props) {
             )}
 
             <View style={styles.tagRow}>
+              {deal.appOnly ? (
+                // Vem primeiro: sem o app da loja, o preco ou o cupom nao valem.
+                <View style={styles.appTag}>
+                  <Text style={styles.appTagText}>SO NO APP</Text>
+                </View>
+              ) : null}
+
               {deal.coupon && !isCouponOnly ? (
                 <View style={styles.inlineCoupon}>
                   <Text style={styles.inlineCouponText}>cupom {deal.coupon}</Text>
@@ -368,6 +375,18 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "900",
     color: palette.warn,
+    letterSpacing: 0.3
+  },
+  appTag: {
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    backgroundColor: palette.infoSoft
+  },
+  appTagText: {
+    fontSize: 10,
+    fontWeight: "900",
+    color: palette.info,
     letterSpacing: 0.3
   },
   taxBox: {

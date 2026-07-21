@@ -24,6 +24,8 @@ const categoryKeywords: { slug: string; label: string; terms: string[] }[] = [
   { slug: "esporte-e-lazer", label: "Esporte", terms: ["tenis", "bicicleta", "academia", "esteira"] }
 ];
 
+type PromobitTag = { name?: string; type?: string };
+
 type PromobitOffer = {
   offerId?: number;
   offerTitle?: string;
@@ -37,6 +39,7 @@ type PromobitOffer = {
   offerPriceType?: string;
   offerLikes?: number;
   offerClicks?: number;
+  offerTags?: PromobitTag[];
   storeName?: string;
   categoryName?: string;
 };
@@ -64,6 +67,14 @@ const readPageProps = (html: string): PromobitPageProps =>
 const PRICE_ERROR_PATTERN = /erro\s+de\s+pre|pre[cç]o\s+bugad|bug\s+de\s+pre|pre[cç]o\s+errad/i;
 
 export const looksLikePriceError = (title: string) => PRICE_ERROR_PATTERN.test(title);
+
+/**
+ * O Promobit marca com o selo "APP" a oferta cujo preco ou cupom so vale dentro
+ * do aplicativo da loja. Cobre os dois casos: preco exclusivo do app e cupom que
+ * so funciona por la.
+ */
+const isAppOnlyOffer = (tags: PromobitTag[] | undefined) =>
+  Boolean(tags?.some((tag) => tag.name?.trim().toUpperCase() === "APP"));
 
 /**
  * O site usa 0,01 como marcador de "sem preco proprio" em ofertas que na verdade
@@ -99,6 +110,7 @@ const toOffer = (raw: PromobitOffer): MarketOffer | undefined => {
     communityVotes: raw.offerLikes,
     publishedAt: raw.offerPublished,
     priceError: looksLikePriceError(title),
+    appOnly: isAppOnlyOffer(raw.offerTags),
     // Promocoes garimpadas pela comunidade valem por si, nao pela palavra-chave.
     curated: true
   };

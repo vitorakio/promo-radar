@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "icons": "python3 scripts/generate-icons.py",
     "extension": "node scripts/build-extension.mjs",
-    "apk": "node scripts/build-apk.mjs"
+    "extension:install": "npm run extension && node scripts/install-extension.mjs",
+    "apk": "node scripts/build-apk.mjs",
+    "extension:zip": "npm run extension && node scripts/pack-extension.mjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",

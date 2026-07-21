@@ -12,11 +12,21 @@ de armazenamento e notificacao; a camada de servicos e a interface sao as mesmas
 ## Extensao do Chrome
 
 ```bash
-npm run extension
+npm run extension:install
 ```
 
-Gera `dist-extension/`. Para instalar: `chrome://extensions` › ligue o **modo
-desenvolvedor** › **Carregar sem compactacao** › aponte para `dist-extension`.
+Compila e copia para `~/.local/share/promo-radar/extension`. Depois, uma vez so:
+`chrome://extensions` › ligue o **modo desenvolvedor** › **Carregar sem
+compactacao** › selecione esse caminho.
+
+Instale de la, e nao de `dist-extension/`: o Chrome deriva o id da extensao do
+caminho absoluto, e o id e a identidade do armazenamento. Como `dist-extension/`
+e recriado do zero a cada build, apontar o Chrome para ele faz a extensao sumir
+da lista durante qualquer rebuild. O diretorio de instalacao so tem o conteudo
+trocado, entao o id se mantem e historico, preferencias e feed sobrevivem.
+
+Para atualizar depois de mexer no codigo: rode o comando de novo e clique em
+atualizar no card da extensao.
 
 O que a extensao faz alem do app web:
 
@@ -31,6 +41,16 @@ O que a extensao faz alem do app web:
 
 Popup e service worker compartilham o mesmo `chrome.storage.local`, entao o feed
 que aparece ao abrir o popup e o da ultima varredura de segundo plano.
+
+Para levar a extensao a outra maquina:
+
+```bash
+npm run extension:zip   # gera promo-radar-extensao-<versao>.zip
+```
+
+Descompacte em `~/.local/share/promo-radar/extension` do outro computador e
+carregue por la. O ZIP tem o `manifest.json` na raiz, que e tambem o formato que
+a Chrome Web Store aceita, caso um dia queira publicar.
 
 ## APK Android
 

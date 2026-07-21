@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "Promo Radar",
+    "slug": "promo-radar",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "promoradar",
+    "icon": "./assets/icon.png",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.personal.promoradar"
+    },
+    "android": {
+      "package": "com.personal.promoradar",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B1220"
+      },
+      "permissions": ["android.permission.INTERNET", "android.permission.POST_NOTIFICATIONS"]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "color": "#12B981",
+          "defaultChannel": "promo-alerts"
+        }
+      ],
+      [
+        "expo-status-bar",
+        {
+          "style": "dark"
+        }
+      ],
+      "expo-web-browser",
+      "./plugins/withReleaseSigning"
+    ]
+  }
+}

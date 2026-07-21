@@ -1,0 +1,26 @@
+node_modules/
+.expo/
+dist/
+web-build/
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.DS_Store
+
+# export web do Expo
+dist/
+
+# build da extensao do Chrome
+dist-extension/
+
+# APK gerado
+dist-apk/
+
+# projeto nativo, recriado por `npx expo prebuild`
+android/
+ios/
+
+# chave de assinatura do APK: perde-la impede atualizar o app ja instalado
+*.jks
+*.keystore
+keystore.properties

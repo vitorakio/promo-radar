@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Promo Radar</title>
+    <style>
+      /* Reset do react-native-web, o mesmo que o Expo aplica no app web. */
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        /* O ScrollView cuida da rolagem; no body ela so criaria uma segunda barra. */
+        overflow: hidden;
+      }
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+      /* O popup nao se estica sozinho: sem tamanho declarado o Chrome abre uma
+         janelinha do tamanho do conteudo inicial, que ainda esta vazio. */
+      body.popup {
+        width: 420px;
+        height: 600px;
+      }
+    </style>
+  </head>
+
+  <body class="__SURFACE__">
+    <div id="root"></div>
+    <script src="__BUNDLE__" defer></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "promo-radar",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo/AppEntry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "icons": "python3 scripts/generate-icons.py",
+    "extension": "node scripts/build-extension.mjs",
+    "apk": "node scripts/build-apk.mjs"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "~56.0.16",
+    "expo-linking": "~56.0.15",
+    "expo-notifications": "~56.0.21",
+    "expo-status-bar": "~56.0.4",
+    "expo-web-browser": "~56.0.5",
+    "react": "^19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.85.3",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.2.2",
+    "@types/react": "~19.2.0",
+    "babel-preset-expo": "~56.0.0",
+    "esbuild": "^0.28.1",
+    "typescript": "~6.0.3"
+  }
+}

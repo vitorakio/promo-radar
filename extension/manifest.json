@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Promo Radar",
+  "version": "0.1.0",
+  "description": "Radar de promocao, cupom e erro de preco nas lojas brasileiras, com varredura e alerta em segundo plano.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Promo Radar",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "alarms", "notifications"],
+  "host_permissions": [
+    "https://www.buscape.com.br/*",
+    "https://www.zoom.com.br/*",
+    "https://www.promobit.com.br/*",
+    "https://www.amazon.com.br/*",
+    "https://www.kabum.com.br/*",
+    "https://servicespub.prod.api.aws.grupokabum.com.br/*",
+    "https://economia.awesomeapi.com.br/*",
+    "https://r.jina.ai/*"
+  ]
+}
